@@ -1,0 +1,17 @@
+targets:
+  $default:
+    builders:
+      injectable_generator:injectable_builder:
+        enabled: true
+        generate_for:
+          - lib/core/di/injection.dart
+      json_serializable:json_serializable:
+        enabled: true
+        generate_for:
+          - lib/features/chat/domain/entities/chat_message.dart
+          - lib/features/medical/domain/entities/medical_condition.dart
+      freezed:freezed:
+        enabled: true
+        generate_for:
+          - lib/features/chat/domain/entities/chat_message.dart
+          - lib/features/medical/domain/entities/medical_condition.dart
