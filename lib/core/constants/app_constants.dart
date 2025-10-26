@@ -1,8 +1,11 @@
 class AppConstants {
   // API Configuration
-  static const String openAiApiKey = 'YOUR_OPENAI_API_KEY';
+  static const String openAiApiKey = String.fromEnvironment(
+    'OPENAI_API_KEY',
+    defaultValue: '',
+  );
   static const String openAiBaseUrl = 'https://api.openai.com/v1';
-  static const String openAiModel = 'gpt-4';
+  static const String openAiModel = 'gpt-3.5-turbo';
 
   // Request Configuration
   static const int maxTokens = 1000;

@@ -1,38 +1,221 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
   <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
+    Medical AI Assistant - المساعد الطبي الذكي
+    Advanced Medical Consultation Platform powered by AI
   -->
   <base href="$FLUTTER_BASE_HREF">
 
+  <!-- Essential Meta Tags -->
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="المساعد الطبي الذكي - احصل على استشارات طبية موثوقة باستخدام الذكاء الاصطناعي. خدمة مجانية متاحة 24/7 لتقديم النصائح الصحية وتحليل الأعراض">
+  <meta name="keywords" content="مساعد طبي, ذكاء اصطناعي, استشارة طبية, صحة, طب, تحليل أشعة, نصائح صحية, طوارئ">
+  <meta name="author" content="Medical AI Team">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Arabic">
+  <meta name="revisit-after" content="7 days">
 
-  <!-- iOS meta tags & icons -->
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://medical-ai-assistant.com/">
+  <meta property="og:title" content="المساعد الطبي الذكي - Medical AI Assistant">
+  <meta property="og:description" content="احصل على استشارات طبية موثوقة باستخدام الذكاء الاصطناعي. خدمة مجانية متاحة 24/7">
+  <meta property="og:image" content="https://medical-ai-assistant.com/icons/og-image.png">
+  <meta property="og:locale" content="ar_SA">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://medical-ai-assistant.com/">
+  <meta name="twitter:title" content="المساعد الطبي الذكي - Medical AI Assistant">
+  <meta name="twitter:description" content="احصل على استشارات طبية موثوقة باستخدام الذكاء الاصطناعي. خدمة مجانية متاحة 24/7">
+  <meta name="twitter:image" content="https://medical-ai-assistant.com/icons/twitter-image.png">
+
+  <!-- iOS Meta Tags & Icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="gpt_model">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="المساعد الطبي">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icons/Icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icons/Icon-512.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.png">
 
-  <title>gpt_model</title>
+  <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="msapplication-TileColor" content="#2E7D32">
+  <meta name="msapplication-navbutton-color" content="#2E7D32">
+
+  <!-- Preconnect to improve performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Title -->
+  <title>المساعد الطبي الذكي - Medical AI Assistant</title>
+
+  <!-- Custom Styles -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #43A047 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Loading Screen */
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .logo-container {
+      background: white;
+      padding: 30px;
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      margin-bottom: 40px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .logo-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #2E7D32, #43A047);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+    }
+
+    .app-title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .app-subtitle {
+      font-size: 20px;
+      opacity: 0.9;
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      margin-top: 24px;
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .app-title {
+        font-size: 32px;
+      }
+      .app-subtitle {
+        font-size: 16px;
+      }
+      .logo-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 48px;
+      }
+    }
+
+    /* Hide loading when Flutter is ready */
+    .flutter-ready .loading-container {
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <!-- Loading Screen -->
+  <div class="loading-container" id="loading">
+    <div class="logo-container">
+      <div class="logo-icon">
+        🏥
+      </div>
+    </div>
+    <h1 class="app-title">المساعد الطبي الذكي</h1>
+    <p class="app-subtitle">Medical AI Assistant</p>
+    <div class="spinner"></div>
+    <p class="loading-text">جاري التحميل...</p>
+  </div>
+
+  <!-- Flutter App -->
   <script src="flutter_bootstrap.js" async></script>
+  
+  <!-- Remove loading screen when Flutter is ready -->
+  <script>
+    window.addEventListener('flutter-initialized', function() {
+      document.body.classList.add('flutter-ready');
+      document.getElementById('loading')?.remove();
+    });
+
+    // Fallback: Remove loading screen after 5 seconds
+    setTimeout(function() {
+      document.body.classList.add('flutter-ready');
+      document.getElementById('loading')?.remove();
+    }, 5000);
+  </script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+  </script>
 </body>
 </html>

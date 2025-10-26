@@ -5,9 +5,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 
 import '../constants/app_constants.dart';
+import '../constants/app_mode.dart';
 import '../network/network_info.dart';
 import '../../features/chat/data/datasources/chat_local_datasource.dart';
 import '../../features/chat/data/datasources/chat_remote_datasource.dart';
+import '../../features/chat/data/datasources/chat_mock_datasource.dart';
 import '../../features/chat/data/repositories/chat_repository_impl.dart';
 import '../../features/chat/domain/repositories/chat_repository.dart';
 import '../../features/chat/domain/usecases/send_message.dart';
@@ -28,18 +30,40 @@ Future<void> configureDependencies() async {
     () => NetworkInfoImpl(connectivity: sl()),
   );
 
-  // OpenAI Service
-  sl.registerLazySingleton(
-    () => OpenAI.instance.build(token: AppConstants.openAiApiKey),
-  );
-
   // Data sources
   sl.registerLazySingleton<ChatLocalDataSource>(
     () => ChatLocalDataSourceImpl(sharedPreferences: sl()),
   );
-  sl.registerLazySingleton<ChatRemoteDataSource>(
-    () => ChatRemoteDataSourceImpl(openAI: sl()),
-  );
+
+  // Remote Data Source - يتم اختياره حسب وضع التطبيق
+  if (AppMode.useStaticData) {
+    // وضع البيانات الثابتة - لا يحتاج API Key
+    print(
+      '🔧 ${AppMode.modeIcon} تشغيل التطبيق في وضع: ${AppMode.currentMode}',
+    );
+    print('📝 استخدام بيانات طبية جاهزة');
+    sl.registerLazySingleton<ChatRemoteDataSource>(() => ChatMockDataSource());
+  } else {
+    // وضع API الحقيقي - يحتاج OpenAI API Key
+    print(
+      '🌐 ${AppMode.modeIcon} تشغيل التطبيق في وضع: ${AppMode.currentMode}',
+    );
+
+    // OpenAI Service
+    sl.registerLazySingleton(() {
+      final token = AppConstants.openAiApiKey;
+      if (token.isEmpty) {
+        throw Exception(
+          'OpenAI API Key is not provided. Please set OPENAI_API_KEY environment variable.',
+        );
+      }
+      return OpenAI.instance.build(token: token);
+    });
+
+    sl.registerLazySingleton<ChatRemoteDataSource>(
+      () => ChatRemoteDataSourceImpl(openAI: sl()),
+    );
+  }
 
   // Repository
   sl.registerLazySingleton<ChatRepository>(
@@ -55,5 +79,7 @@ Future<void> configureDependencies() async {
   sl.registerLazySingleton(() => GetChatHistory(repository: sl()));
 
   // BLoC
-  sl.registerFactory(() => ChatBloc(sendMessage: sl(), getChatHistory: sl()));
+  sl.registerLazySingleton(
+    () => ChatBloc(sendMessage: sl(), getChatHistory: sl()),
+  );
 }

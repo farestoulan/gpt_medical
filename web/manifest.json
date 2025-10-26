@@ -1,23 +1,31 @@
 {
-    "name": "gpt_model",
-    "short_name": "gpt_model",
+    "name": "المساعد الطبي الذكي - Medical AI Assistant",
+    "short_name": "المساعد الطبي",
+    "description": "مساعد طبي ذكي يستخدم تقنيات الذكاء الاصطناعي لتقديم استشارات طبية موثوقة. خدمة مجانية متاحة 24/7 لتقديم النصائح الصحية وتحليل الأعراض",
     "start_url": ".",
+    "scope": "/",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+    "orientation": "any",
+    "background_color": "#2E7D32",
+    "theme_color": "#2E7D32",
+    "dir": "rtl",
+    "lang": "ar",
     "prefer_related_applications": false,
+    "categories": ["health", "medical", "lifestyle"],
+    "screenshots": [],
     "icons": [
         {
             "src": "icons/Icon-192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "icons/Icon-512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "icons/Icon-maskable-192.png",
@@ -31,5 +39,44 @@
             "type": "image/png",
             "purpose": "maskable"
         }
-    ]
+    ],
+    "shortcuts": [
+        {
+            "name": "محادثة جديدة",
+            "short_name": "محادثة",
+            "description": "بدء محادثة طبية جديدة",
+            "url": "/chat",
+            "icons": [{"src": "icons/Icon-192.png", "sizes": "192x192"}]
+        },
+        {
+            "name": "تحليل صورة",
+            "short_name": "تحليل",
+            "description": "رفع صورة طبية للتحليل",
+            "url": "/image-analysis",
+            "icons": [{"src": "icons/Icon-192.png", "sizes": "192x192"}]
+        },
+        {
+            "name": "نصائح صحية",
+            "short_name": "نصائح",
+            "description": "احصل على نصائح صحية",
+            "url": "/health-tips",
+            "icons": [{"src": "icons/Icon-192.png", "sizes": "192x192"}]
+        },
+        {
+            "name": "الطوارئ",
+            "short_name": "طوارئ",
+            "description": "دليل الإسعافات الأولية",
+            "url": "/emergency",
+            "icons": [{"src": "icons/Icon-192.png", "sizes": "192x192"}]
+        }
+    ],
+    "share_target": {
+        "action": "/share",
+        "method": "GET",
+        "params": {
+            "title": "title",
+            "text": "text",
+            "url": "url"
+        }
+    }
 }

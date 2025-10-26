@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../core/utils/responsive_helper.dart';
 import '../../features/chat/presentation/pages/responsive_chat_page.dart';
+import '../../features/chat/presentation/pages/web_home_page.dart';
+import '../../features/chat/presentation/pages/improved_desktop_chat_page.dart';
+import '../../screens/home_screen.dart';
 import '../../screens/health_tips_screen.dart';
 import '../../screens/emergency_screen.dart';
 
@@ -12,11 +15,31 @@ class ResponsiveNavigation {
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
-      home: (context) => const ResponsiveHomePage(),
-      chat: (context) => const ResponsiveChatPage(),
+      home: (context) => _getHomePage(context),
+      chat: (context) => _getChatPage(context),
       healthTips: (context) => const HealthTipsScreen(),
       emergency: (context) => const EmergencyScreen(),
     };
+  }
+
+  /// Returns the appropriate home page based on device type
+  static Widget _getHomePage(BuildContext context) {
+    if (ResponsiveHelper.isWeb(context) ||
+        ResponsiveHelper.isDesktop(context)) {
+      return const WebHomePage();
+    } else {
+      return const HomeScreen();
+    }
+  }
+
+  /// Returns the appropriate chat page based on device type
+  static Widget _getChatPage(BuildContext context) {
+    if (ResponsiveHelper.isWeb(context) ||
+        ResponsiveHelper.isDesktop(context)) {
+      return const ImprovedDesktopChatPage();
+    } else {
+      return const ResponsiveChatPage();
+    }
   }
 
   static Widget buildResponsiveAppBar(

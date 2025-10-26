@@ -15,7 +15,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   Future<String> sendMessage(String message) async {
     try {
       final request = ChatCompleteText(
-        model: GptTurbo0301ChatModel(),
+        model: GptTurboChatModel(),
         messages: [
           Map<String, String>.from({
             'role': 'system',
