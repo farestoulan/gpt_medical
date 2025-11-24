@@ -60,22 +60,22 @@ class ResponsiveTheme {
     }
   }
 
-  static CardTheme _getCardTheme(DeviceType deviceType) {
+  static CardThemeData _getCardTheme(DeviceType deviceType) {
     switch (deviceType) {
       case DeviceType.mobile:
-        return CardTheme(
+        return CardThemeData(
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         );
       case DeviceType.tablet:
-        return CardTheme(
+        return CardThemeData(
           elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
         );
       case DeviceType.desktop:
-        return CardTheme(
+        return CardThemeData(
           elevation: 6,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
