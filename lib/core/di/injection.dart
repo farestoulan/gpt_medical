@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 
 import '../constants/app_constants.dart';
@@ -23,11 +23,11 @@ Future<void> configureDependencies() async {
   // External dependencies
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => Connectivity());
+  // sl.registerLazySingleton(() => Connectivity());
 
   // Core
   sl.registerLazySingleton<NetworkInfo>(
-    () => NetworkInfoImpl(connectivity: sl()),
+    () => NetworkInfoImpl(), // احذف الاعتماد على connectivity
   );
 
   // Data sources
