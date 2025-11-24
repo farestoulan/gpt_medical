@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gpt_model/core/navigation/responsive_navigation.dart';
 import 'package:image_picker/image_picker.dart';
 import '../bloc/chat_bloc.dart';
-import '../../../../widgets/message_bubble.dart';
+import '../widgets/message_bubble.dart';
 
 /// صفحة محادثة محسّنة خصيصاً للويب/ديسكتوب
 /// تتضمن animations، hover effects، وتجربة مستخدم محسّنة
-class ImprovedDesktopChatPage extends StatefulWidget {
-  const ImprovedDesktopChatPage({super.key});
+class WebChatPage extends StatefulWidget {
+  const WebChatPage({super.key});
 
   @override
-  State<ImprovedDesktopChatPage> createState() =>
-      _ImprovedDesktopChatPageState();
+  State<WebChatPage> createState() => _WebChatPageState();
 }
 
-class _ImprovedDesktopChatPageState extends State<ImprovedDesktopChatPage>
+class _WebChatPageState extends State<WebChatPage>
     with SingleTickerProviderStateMixin {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -135,12 +135,12 @@ class _ImprovedDesktopChatPageState extends State<ImprovedDesktopChatPage>
                 const SizedBox(height: 8),
                 _buildNavItem('النصائح الصحية', Icons.favorite_rounded, 2, () {
                   setState(() => _selectedNavIndex = 2);
-                  Navigator.pushNamed(context, '/health-tips');
+                  Navigator.pushNamed(context, Routes.healthTips);
                 }),
                 const SizedBox(height: 8),
                 _buildNavItem('الطوارئ', Icons.emergency_rounded, 3, () {
                   setState(() => _selectedNavIndex = 3);
-                  Navigator.pushNamed(context, '/emergency');
+                  Navigator.pushNamed(context, Routes.emergency);
                 }),
                 const SizedBox(height: 24),
                 const Divider(),

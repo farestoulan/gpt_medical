@@ -107,6 +107,9 @@ dev_dependencies:
   json_serializable: ^6.7.1
   freezed: ^2.4.6
 
+  # Launcher icon generator (run to update platform icons)
+  flutter_launcher_icons: ^0.10.0
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -117,6 +120,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # Project image assets
+  assets:
+    - assets/images/singleclic_logo.jpeg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -148,3 +155,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# Configuration for flutter_launcher_icons. Run:
+#   flutter pub get ; flutter pub run flutter_launcher_icons:main
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/singleclic_logo.jpeg"

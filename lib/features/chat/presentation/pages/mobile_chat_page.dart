@@ -1,11 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/chat_bloc.dart';
-import '../../../../core/widgets/adaptive_layout.dart';
-import '../../../../widgets/message_bubble.dart';
+import '../../../../core/common_widgets/widgets/adaptive_layout.dart';
+import '../widgets/message_bubble.dart';
 
-class MobileChatPage extends StatelessWidget {
+class MobileChatPage extends StatefulWidget {
   const MobileChatPage({super.key});
+
+  @override
+  State<MobileChatPage> createState() => _MobileChatPageState();
+}
+
+class _MobileChatPageState extends State<MobileChatPage> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _sendMessage() {
+    final text = _controller.text.trim();
+    if (text.isEmpty) return;
+    // Dispatch event to bloc
+    context.read<ChatBloc>().add(SendMessageEvent(message: text));
+    // Clear input and unfocus keyboard
+    _controller.clear();
+    FocusScope.of(context).unfocus();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +131,7 @@ class MobileChatPage extends StatelessWidget {
                     // Text input
                     Expanded(
                       child: TextField(
+                        controller: _controller,
                         decoration: const InputDecoration(
                           hintText: 'اكتب رسالتك هنا...',
                           border: OutlineInputBorder(),
@@ -118,13 +142,7 @@ class MobileChatPage extends StatelessWidget {
                         ),
                         maxLines: null,
                         textDirection: TextDirection.rtl,
-                        onSubmitted: (value) {
-                          if (value.trim().isNotEmpty) {
-                            context.read<ChatBloc>().add(
-                              SendMessageEvent(message: value),
-                            );
-                          }
-                        },
+                        onSubmitted: (_) => _sendMessage(),
                       ),
                     ),
 
@@ -133,7 +151,7 @@ class MobileChatPage extends StatelessWidget {
                     // Send button
                     FloatingActionButton.small(
                       onPressed: () {
-                        // TODO: Implement send message
+                        _sendMessage();
                       },
                       backgroundColor: const Color(0xFF2E7D32),
                       child: const Icon(Icons.send, color: Colors.white),

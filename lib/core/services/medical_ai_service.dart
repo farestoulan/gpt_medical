@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/medical_condition.dart';
-import '../data/medical_knowledge.dart';
+import '../../features/chat/data/models/medical_condition.dart';
+import '../../features/medical/data/datasources/medical_knowledge.dart';
 
 class MedicalAIService {
   static const String _baseUrl = 'https://api.openai.com/v1';

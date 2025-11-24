@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/app_mode.dart';
+import '../../constants/app_mode.dart';
 
 /// مؤشر بصري لوضع التطبيق (Static Data أو Real API)
 /// يظهر في أعلى الشاشة لتوضيح الوضع الحالي

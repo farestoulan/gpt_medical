@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/chat_bloc.dart';
-import '../../../../core/widgets/adaptive_layout.dart';
+import '../../../../core/common_widgets/widgets/adaptive_layout.dart';
 import '../../../../core/utils/responsive_helper.dart';
-import '../../../../widgets/message_bubble.dart';
+import '../widgets/message_bubble.dart';
 
 class TabletChatPage extends StatelessWidget {
   const TabletChatPage({super.key});

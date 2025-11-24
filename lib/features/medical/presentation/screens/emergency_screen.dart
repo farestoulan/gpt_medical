@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../data/medical_knowledge.dart';
+import '../../../../core/common_widgets/app_header.dart';
+import '../../data/datasources/medical_knowledge.dart';
 
 class EmergencyScreen extends StatefulWidget {
   const EmergencyScreen({super.key});
@@ -13,11 +14,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('الطوارئ والإسعافات الأولية'),
-        backgroundColor: Colors.red[700],
-        foregroundColor: Colors.white,
-      ),
+      appBar: AppHeader.standard(backgroundColor: Colors.red[700]),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(

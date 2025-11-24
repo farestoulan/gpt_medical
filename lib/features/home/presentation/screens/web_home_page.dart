@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gpt_model/core/common_widgets/singleclic_logo.dart';
+import 'package:gpt_model/core/navigation/responsive_navigation.dart';
 
 /// صفحة رئيسية محسّنة خصيصاً للويب
 /// تتضمن تصميم عصري وجمالي مع animations
@@ -140,18 +142,11 @@ class _WebHomePageState extends State<WebHomePage>
       ),
       child: Row(
         children: [
-          // Logo & Title
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Icon(
-              Icons.medical_services_rounded,
-              color: Colors.white,
-              size: 32,
-            ),
+          // Logo & Title (use project SingleClic logo)
+          const SingleClicLogo(
+            width: 200,
+            // height: 100,
+            semanticLabel: 'SingleClic',
           ),
           const SizedBox(width: 16),
           const Column(
@@ -278,7 +273,7 @@ class _WebHomePageState extends State<WebHomePage>
                 'ابدأ المحادثة الآن',
                 Icons.chat_rounded,
                 () {
-                  Navigator.pushNamed(context, '/chat');
+                  Navigator.pushNamed(context, Routes.chat);
                 },
               ),
               const SizedBox(width: 24),
@@ -603,7 +598,7 @@ class _WebHomePageState extends State<WebHomePage>
             'ابدأ المحادثة الآن',
             Icons.rocket_launch_rounded,
             () {
-              Navigator.pushNamed(context, '/chat');
+              Navigator.pushNamed(context, Routes.chat);
             },
           ),
         ],

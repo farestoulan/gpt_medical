@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../features/chat/presentation/bloc/chat_bloc.dart';
-import 'chat_screen.dart';
-import 'health_tips_screen.dart';
-import 'emergency_screen.dart';
+import 'package:gpt_model/core/navigation/responsive_navigation.dart';
+import '../../../../core/common_widgets/singleclic_logo.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+import '../../../medical/presentation/screens/health_tips_screen.dart';
+import '../../../medical/presentation/screens/emergency_screen.dart';
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    // تحميل الرسائل المحفوظة عند فتح التطبيق
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ChatBloc>().add(const LoadChatHistoryEvent());
-    });
-  }
+class TabletHomeScreen extends StatelessWidget {
+  const TabletHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,25 +21,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(32.0),
             child: Column(
               children: [
                 // Header
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(
-                        Icons.medical_services,
-                        color: Colors.white,
-                        size: 32,
-                      ),
+                      padding: const EdgeInsets.all(4),
+                      child: const SingleClicLogo(width: 150),
                     ),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 24),
                     const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'المساعد الطبي الذكي',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 24,
+                              fontSize: 32,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -70,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'صحتك في أيد أمينة',
                             style: TextStyle(
                               color: Colors.white70,
-                              fontSize: 16,
+                              fontSize: 20,
                             ),
                           ),
                         ],
@@ -79,21 +57,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
 
-                const SizedBox(height: 40),
+                const SizedBox(height: 48),
 
                 // Features Cards
                 Expanded(
                   child: GridView.count(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 24,
+                    childAspectRatio: 1.5,
                     children: [
                       _buildFeatureCard(
                         context,
                         'محادثة طبية',
                         Icons.chat_bubble_outline,
                         'اسأل عن أي أعراض أو مشاكل صحية',
-                        () => _navigateToChat(context),
+                        () {
+                          Navigator.pushNamed(context, Routes.chat);
+                        },
                       ),
                       _buildFeatureCard(
                         context,
@@ -120,14 +101,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 32),
 
                 // Quick Actions
                 Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(32),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(24),
                   ),
                   child: Column(
                     children: [
@@ -135,23 +116,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         'ابدأ محادثة طبية الآن',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 16),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton.icon(
-                          onPressed: () => _navigateToChat(context),
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.chat);
+                          },
                           icon: const Icon(Icons.chat),
                           label: const Text('ابدأ المحادثة'),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             foregroundColor: const Color(0xFF2E7D32),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            padding: const EdgeInsets.symmetric(vertical: 20),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(16),
                             ),
                           ),
                         ),
@@ -177,36 +160,36 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(32),
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.9),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 10,
-              offset: const Offset(0, 5),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
             ),
           ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 40, color: const Color(0xFF2E7D32)),
-            const SizedBox(height: 12),
+            Icon(icon, size: 56, color: const Color(0xFF2E7D32)),
+            const SizedBox(height: 16),
             Text(
               title,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF2E7D32),
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             Text(
               description,
-              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
               textAlign: TextAlign.center,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -217,15 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _navigateToChat(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const ChatScreen()),
-    );
-  }
-
   void _navigateToImageAnalysis(BuildContext context) {
-    // TODO: Implement image analysis screen
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('ميزة تحليل الصور قيد التطوير')),
     );

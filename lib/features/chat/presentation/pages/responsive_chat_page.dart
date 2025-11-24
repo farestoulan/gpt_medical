@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gpt_model/features/chat/presentation/pages/web_chat_page.dart';
 import '../bloc/chat_bloc.dart';
-import '../../../../core/widgets/adaptive_layout.dart';
+import '../../../../core/common_widgets/widgets/adaptive_layout.dart';
 import '../../../../core/utils/responsive_helper.dart';
 import 'mobile_chat_page.dart';
 import 'tablet_chat_page.dart';
@@ -15,8 +16,8 @@ class ResponsiveChatPage extends StatelessWidget {
     return AdaptiveLayout(
       mobile: const MobileChatPage(),
       tablet: const TabletChatPage(),
-      desktop: const DesktopChatPage(),
-      web: const DesktopChatPage(), // Use desktop layout for web
+      desktop: const WebChatPage(),
+      web: const WebChatPage(), // Use desktop layout for web
     );
   }
 }

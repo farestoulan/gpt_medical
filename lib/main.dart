@@ -23,8 +23,7 @@ class MedicalChatApp extends StatelessWidget {
         title: 'المساعد الطبي الذكي',
         debugShowCheckedModeBanner: false,
         theme: ResponsiveTheme.getTheme(context),
-        initialRoute: ResponsiveNavigation.home,
-        routes: ResponsiveNavigation.getRoutes(),
+        onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
     );
   }

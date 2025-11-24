@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../utils/responsive_helper.dart';
+import '../../utils/responsive_helper.dart';
+import '../singleclic_logo.dart';
 
 class AdaptiveLayout extends StatelessWidget {
   final Widget mobile;
@@ -115,14 +117,20 @@ class AdaptiveGrid extends StatelessWidget {
 }
 
 class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  /// Optional text title. If [titleWidget] is provided it takes precedence.
+  final String? title;
+
+  /// Optional widget title (for example `SingleClicLogo`). If null and
+  /// [title] is also null, the SingleClic logo will be shown by default.
+  final Widget? titleWidget;
   final List<Widget>? actions;
   final Widget? leading;
   final bool centerTitle;
 
   const AdaptiveAppBar({
     super.key,
-    required this.title,
+    this.title,
+    this.titleWidget,
     this.actions,
     this.leading,
     this.centerTitle = true,
@@ -132,24 +140,32 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final deviceType = ResponsiveHelper.getDeviceType(context);
 
+    // Decide what to show in the title area: explicit widget, text, or logo.
+    final Widget effectiveTitle =
+        titleWidget ??
+        (title != null
+            ? Text(
+              title!,
+              style: TextStyle(
+                fontSize: ResponsiveHelper.getResponsiveFontSize(
+                  context,
+                  mobile: 18,
+                  tablet: 20,
+                  desktop: 22,
+                ),
+              ),
+            )
+            : const SingleClicLogo(width: 160));
+
     return AppBar(
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: ResponsiveHelper.getResponsiveFontSize(
-            context,
-            mobile: 18,
-            tablet: 20,
-            desktop: 22,
-          ),
-        ),
-      ),
+      title: effectiveTitle,
       centerTitle: centerTitle,
       leading: leading,
       actions: actions,
       elevation: deviceType == DeviceType.desktop ? 0 : 4,
       backgroundColor: const Color(0xFF2E7D32),
       foregroundColor: Colors.white,
+      automaticallyImplyLeading: !kIsWeb,
     );
   }
 

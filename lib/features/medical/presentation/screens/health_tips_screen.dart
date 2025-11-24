@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../data/medical_knowledge.dart';
+import '../../../../core/common_widgets/app_header.dart';
+import '../../data/datasources/medical_knowledge.dart';
 
 class HealthTipsScreen extends StatefulWidget {
   const HealthTipsScreen({super.key});
@@ -22,11 +23,7 @@ class _HealthTipsScreenState extends State<HealthTipsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('النصائح الصحية'),
-        backgroundColor: const Color(0xFF2E7D32),
-        foregroundColor: Colors.white,
-      ),
+      appBar: AppHeader.standard(backgroundColor: const Color(0xFF2E7D32)),
       body: Column(
         children: [
           // Search Bar
@@ -37,15 +34,16 @@ class _HealthTipsScreenState extends State<HealthTipsScreen> {
               decoration: InputDecoration(
                 hintText: 'ابحث في النصائح الصحية...',
                 prefixIcon: const Icon(Icons.search),
-                suffixIcon: _searchController.text.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: () {
-                          _searchController.clear();
-                          _filterTips();
-                        },
-                      )
-                    : null,
+                suffixIcon:
+                    _searchController.text.isNotEmpty
+                        ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _searchController.clear();
+                            _filterTips();
+                          },
+                        )
+                        : null,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -114,9 +112,7 @@ class _HealthTipsScreenState extends State<HealthTipsScreen> {
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -142,17 +138,10 @@ class _HealthTipsScreenState extends State<HealthTipsScreen> {
             Expanded(
               child: Text(
                 tip,
-                style: const TextStyle(
-                  fontSize: 16,
-                  height: 1.5,
-                ),
+                style: const TextStyle(fontSize: 16, height: 1.5),
               ),
             ),
-            Icon(
-              Icons.lightbulb_outline,
-              color: Colors.amber[600],
-              size: 24,
-            ),
+            Icon(Icons.lightbulb_outline, color: Colors.amber[600], size: 24),
           ],
         ),
       ),
@@ -163,13 +152,12 @@ class _HealthTipsScreenState extends State<HealthTipsScreen> {
     setState(() {
       final query = _searchController.text.toLowerCase();
       final allTips = MedicalKnowledge.getGeneralHealthTips();
-      
+
       if (query.isEmpty) {
         _filteredTips = allTips;
       } else {
-        _filteredTips = allTips.where((tip) => 
-          tip.toLowerCase().contains(query)
-        ).toList();
+        _filteredTips =
+            allTips.where((tip) => tip.toLowerCase().contains(query)).toList();
       }
     });
   }
